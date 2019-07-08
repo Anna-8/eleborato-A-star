@@ -1,6 +1,10 @@
 #include <iostream>
+#include <stdio.h>
+#include <math.h>
+
+#include "Mappa.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    Mappa mappa(1);
     return 0;
 }
