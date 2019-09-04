@@ -171,6 +171,8 @@ public: // methods
 
         m_OpenList.push_back( m_Start ); // heap now unsorted
 
+
+
         // Sort back element into heap
         push_heap( m_OpenList.begin(), m_OpenList.end(), HeapCompare_f() );
 

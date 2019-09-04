@@ -3,53 +3,36 @@
 //
 
 #include "MapSearchNode.h"
-#include <iostream>
-#include <stdio.h>
 #include <math.h>
+#include <iostream>
 #include "stlastar.h"
 #include "Mappa.h"
+using namespace std;
 
-bool MapSearchNode::IsSameState( MapSearchNode &rhs )
-{
-
+bool MapSearchNode::IsSameState( MapSearchNode &rhs ){
     // same state in a maze search is simply when (x,y) are the same
-    if( (x == rhs.x) &&
-        (y == rhs.y) )
-    {
+    if( (x == rhs.x) && (y == rhs.y) )
         return true;
-    }
-    else
-    {
-        return false;
-    }
-
+    return false;
 }
 
-void MapSearchNode::PrintNodeInfo()
-{
+void MapSearchNode::PrintNodeInfo(){
     char str[100];
     sprintf( str, "Node position : (%d,%d)\n", x,y );
 
-    std::cout << str;
+    cout << str;
 }
 
 // Here's the heuristic function that estimates the distance from a Node
 // to the Goal.
 
-float MapSearchNode::GoalDistanceEstimate( MapSearchNode &nodeGoal )
-{
+float MapSearchNode::GoalDistanceEstimate( MapSearchNode &nodeGoal ){
     return abs(x - nodeGoal.x) + abs(y - nodeGoal.y);
 }
 
-bool MapSearchNode::IsGoal( MapSearchNode &nodeGoal )
-{
-
-    if( (x == nodeGoal.x) &&
-        (y == nodeGoal.y) )
-    {
+bool MapSearchNode::IsGoal( MapSearchNode &nodeGoal ){
+    if( (x == nodeGoal.x) && (y == nodeGoal.y) )
         return true;
-    }
-
     return false;
 }
 
@@ -57,9 +40,7 @@ bool MapSearchNode::IsGoal( MapSearchNode &nodeGoal )
 // AddSuccessor to give the successors to the AStar class. The A* specific initialisation
 // is done for each node internally, so here you just set the state information that
 // is specific to the application
-bool MapSearchNode::GetSuccessors( AStarSearch<MapSearchNode> *astarsearch, MapSearchNode *parent_node )
-{
-
+bool MapSearchNode::GetSuccessors( AStarSearch<MapSearchNode> *astarsearch, MapSearchNode *parent_node ){
     int parent_x = -1;
     int parent_y = -1;
 
@@ -74,7 +55,7 @@ bool MapSearchNode::GetSuccessors( AStarSearch<MapSearchNode> *astarsearch, MapS
 
     // push each possible move except allowing the search to go backwards
 
-    if( (GetMap( x-1, y ) < 9)
+    if( (Mappa::crea().GetMap( x-1, y ) < 9)
         && !((parent_x == x-1) && (parent_y == y))
             )
     {
@@ -82,7 +63,7 @@ bool MapSearchNode::GetSuccessors( AStarSearch<MapSearchNode> *astarsearch, MapS
         astarsearch->AddSuccessor( NewNode );
     }
 
-    if( (GetMap( x, y-1 ) < 9)
+    if( (Mappa::crea().GetMap( x, y-1 ) < 9)
         && !((parent_x == x) && (parent_y == y-1))
             )
     {
@@ -90,7 +71,7 @@ bool MapSearchNode::GetSuccessors( AStarSearch<MapSearchNode> *astarsearch, MapS
         astarsearch->AddSuccessor( NewNode );
     }
 
-    if( (GetMap( x+1, y ) < 9)
+    if( (Mappa::crea().GetMap( x+1, y ) < 9)
         && !((parent_x == x+1) && (parent_y == y))
             )
     {
@@ -99,7 +80,7 @@ bool MapSearchNode::GetSuccessors( AStarSearch<MapSearchNode> *astarsearch, MapS
     }
 
 
-    if( (GetMap( x, y+1 ) < 9)
+    if( (Mappa::crea().GetMap( x, y+1 ) < 9)
         && !((parent_x == x) && (parent_y == y+1))
             )
     {
@@ -109,9 +90,13 @@ bool MapSearchNode::GetSuccessors( AStarSearch<MapSearchNode> *astarsearch, MapS
 
     return true;
 }
-float MapSearchNode::GetCost( MapSearchNode &successor )
-{
-    return (float) GetMap( x, y );
+
+// given this node, what does it cost to move to successor. In the case
+// of our map the answer is the map terrain value at this node since that is
+// conceptually where we're moving
+
+float MapSearchNode::GetCost( MapSearchNode &successor ){
+    return (float)Mappa::crea().GetMap( x, y );
 
 }
 
