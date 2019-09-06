@@ -2,20 +2,16 @@
 // Created by anna on 03/09/19.
 //
 
+#include <iostream>
 #include "Personaggio.h"
+#include "Mappa.h"
+#define TILE 32
 
-
-void Personaggio::setX(int x) {
-    Personaggio::x = x;
-}
 
 int Personaggio::getY() const {
     return y;
 }
 
-void Personaggio::setY(int y) {
-    Personaggio::y = y;
-}
 
 int Personaggio::getX() const {
     return x;
@@ -29,17 +25,45 @@ void Personaggio::DisegnaPersonaggio(RenderWindow &window) {
 }
 
 void Personaggio::setPos(int x, int y) {
-    if(index!=pos.size())
-        Personaggio::sprite.setPosition(pos[index++]);
+    this->x = x;
+    this->y = y;
 
 }
 
 
 void Personaggio::setPos() {
-    if(index!=pos.size())
-        Personaggio::sprite.setPosition(pos[index++]);
+    if(index!=coordinate.size())
+        Personaggio::sprite.setPosition(coordinate[index++]);
 }
 
 Personaggio::Personaggio() {
+    int xi;
+    int yi;
+    do {
+        xi = static_cast<int>(random() % Mappa::crea().getColumns());
+        yi = static_cast<int>(random() % Mappa::crea().getRows());
+    }while (Mappa::crea().getTiles(xi,yi) >= 9);
+    cout << Mappa::crea().getTiles(xi,yi) << endl;
+    this->x=xi;
+    this->y=yi;
 
+    texture.loadFromFile("sprite.png");
+    sprite.setTexture(texture);
+    sprite.scale(0.25,0.25);
+    sprite.setPosition(y*TILE,x*TILE);
+    index=0;
+
+}
+
+Personaggio &Personaggio::crea() {
+    static Personaggio personaggio;
+    return personaggio;
+}
+
+const vector<Vector2f> &Personaggio::getCoordinate() const {
+    return coordinate;
+}
+
+void Personaggio::setCoordinate(int x, int y) {
+    Personaggio::coordinate.push_back(Vector2f(y,x));
 }

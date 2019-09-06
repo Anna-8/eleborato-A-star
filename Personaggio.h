@@ -13,21 +13,25 @@ using namespace std;
 class Personaggio {
 public:
     Personaggio();
-    void setX(int x);
     int getX() const;
 
     int getY() const;
-    void setY(int y);
 
     void setPos(int x, int y);
     void setPos();
 
+    const vector<Vector2f> &getCoordinate() const;
+
     void DisegnaPersonaggio(RenderWindow &window);
+    static Personaggio& crea();
+
+    void setCoordinate(int x, int y);
 
 private:
     int x;
     int y;
-    vector<Vector2f> pos;
+
+    vector<Vector2f> coordinate;
 
     Sprite sprite;
     Texture texture;

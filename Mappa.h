@@ -29,6 +29,7 @@ private:
 
 public:
     static Mappa& crea(int dim =rand()%3 );
+
     int getColumns() const;
     int getRows() const;
     int GetMap(int x, int y);
@@ -36,7 +37,7 @@ public:
     bool load();
     void DisegnaMappa(RenderWindow &window);
 
-    const vector<vector<int>> &getTiles() const;
+    int getTiles(int x, int y) const;
 
 
 };

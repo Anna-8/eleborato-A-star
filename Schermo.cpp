@@ -17,26 +17,11 @@
 Schermo::~Schermo() = default;
 
 
-Schermo::Schermo(Personaggio personaggio, Obiettivo obiettivo) {
-    cout<<"prova"<<std::endl;
+Schermo::Schermo( Obiettivo obiettivo) {
     Mappa::crea().load();
     view.setSize(Mappa::crea().getRows()*TILE, Mappa::crea().getColumns()*TILE);
     view.setCenter(Mappa::crea().getRows()*TILE/2, Mappa::crea().getColumns()*TILE/2);
-    int Xi, Xf; //coordinate del punto di partenza
-    int Yi, Yf; //coordinate del punto di arrivo
-    do{
-        Xi= static_cast<int>(random() % Mappa::crea().getColumns());
-        Yi= static_cast<int>(random()%Mappa::crea().getRows());
-        Xf= static_cast<int>(random() % Mappa::crea().getColumns());
-        Yf= static_cast<int>(random()%Mappa::crea().getRows());
-    } while ((Mappa::crea().getTiles()[Xi][Yi]==9) & (Mappa::crea().getTiles()[Xf][Yf]==9));
-    cout<<"prova"<<std::endl;
-
-    personaggio.setPos(Xi*TILE,Yi*TILE);
-    obiettivo.setpos(Xf*TILE,Yf*TILE);
-    cout<<"prova"<<std::endl;
     window.create(VideoMode(800,600),"Algoritmo A*");
-    cout<<"prova"<<std::endl;
     window.setFramerateLimit(60); //Limit the framerate to a maximum fixed frequenc,Parameters: Framerate limit, in frames per seconds
     sf::WindowHandle handle = window.getSystemHandle(); //Get the OS-specific handle of the window
     sf::Window window(handle);
@@ -45,7 +30,7 @@ Schermo::Schermo(Personaggio personaggio, Obiettivo obiettivo) {
 
 }
 
-void Schermo::generaSchermo() {
+void Schermo::generaSchermo(Obiettivo obiettivo) {
 
     while (window.isOpen()) {
 
@@ -60,25 +45,30 @@ void Schermo::generaSchermo() {
 
         window.clear();
 
-
         Mappa::crea().DisegnaMappa(window);
+
         obiettivo.drawPersonaggio(window);
-        Astar();
+
+        if (!eseguito)
+            Astar(obiettivo);
+        this->setEseguito(true);
+
 
         times=clock.getElapsedTime(); //returns the time elapsed since the last call to restart()
+
         if(times.asSeconds()>1){
-            personaggio.setPos();
+            Personaggio::crea().setPos();
             clock.restart(); //puts the time counter back to zero
         }
 
-        personaggio.DisegnaPersonaggio(window);
+        Personaggio::crea().DisegnaPersonaggio(window);
 
         window.display(); //rendering has been done for the current frame, in order to show it on screen
     }
 
 }
 
-void Schermo::Astar() {
+void Schermo::Astar( Obiettivo obiettivo) {
 
     AStarSearch<MapSearchNode> astarsearch;
 
@@ -90,14 +80,14 @@ void Schermo::Astar() {
 
         // Create a start state
         MapSearchNode nodeStart;
-        nodeStart.x = personaggio.getX()/TILE;
-        nodeStart.y = personaggio.getY()/TILE;
+        nodeStart.x = Personaggio::crea().getX();
+        nodeStart.y = Personaggio::crea().getY();
         cout << "Punto di partenza (" << nodeStart.x << "," << nodeStart.y << ")" << endl;
 
         // Define the goal state
         MapSearchNode nodeEnd;
-        nodeEnd.x = obiettivo.getX()/TILE;
-        nodeEnd.y = obiettivo.getY()/TILE;
+        nodeEnd.x = obiettivo.getX();
+        nodeEnd.y = obiettivo.getY();
         cout << "Punto di arrivo (" << nodeEnd.x << "," << nodeEnd.y << ")" << endl;
 
         // Set Start and goal states
@@ -161,6 +151,7 @@ void Schermo::Astar() {
             int steps = 0;
 
             node->PrintNodeInfo();
+
             for (;;) {
                 node = astarsearch.GetSolutionNext();
 
@@ -177,6 +168,7 @@ void Schermo::Astar() {
 
 
             };
+
 
             cout << "Solution steps " << steps << endl;
 
@@ -196,6 +188,12 @@ void Schermo::Astar() {
 
         astarsearch.EnsureMemoryFreed();
 
+
     }
 
+
+}
+
+void Schermo::setEseguito(bool eseguito) {
+    Schermo::eseguito = eseguito;
 }

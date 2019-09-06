@@ -46,9 +46,9 @@ Mappa::Mappa(int dim) {
         for (int j = 0; j < columns; j++) {
 
 
-           // std::cout << tiles[i][j] << " ";
+            std::cout << tiles[i][j] << " ";
         }
-        //std::cout << std::endl;
+        std::cout << std::endl;
     }
 }
 
@@ -68,7 +68,7 @@ int Mappa::getColumns() const {
 
 
 int Mappa::GetMap( int x, int y ) {
-    if( x < 0 || x >= rows|| y < 0 || y >= columns){
+    if( x < 0 || x >= rows|| y < 0 || y >= columns) {
         return 9;
     }
     return tiles[x][y];
@@ -145,8 +145,8 @@ bool Mappa::load() {
 
 }
 
-const vector<vector<int>> &Mappa::getTiles() const {
-    return tiles;
+int Mappa::getTiles(int x, int y) const {
+    return tiles[x][y];
 }
 
 void Mappa::DisegnaMappa(RenderWindow &window) {

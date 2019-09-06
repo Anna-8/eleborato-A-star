@@ -16,11 +16,14 @@ public:
 
     MapSearchNode( int px, int py ) { x=px; y=py;  }
 
+
+
     float GoalDistanceEstimate( MapSearchNode &nodeGoal );
     bool IsGoal( MapSearchNode &nodeGoal );
     bool GetSuccessors( AStarSearch<MapSearchNode> *astarsearch, MapSearchNode *parent_node );
     float GetCost( MapSearchNode &successor );
     bool IsSameState( MapSearchNode &rhs );
+
 
 
     void PrintNodeInfo();
