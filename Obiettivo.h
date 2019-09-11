@@ -11,8 +11,11 @@ using namespace sf;
 
 class Obiettivo {
 public:
+    void crea();
+
     Obiettivo();
 
+    Obiettivo(int x,int y);
     virtual ~Obiettivo();
 
     void drawPersonaggio(RenderWindow &window);
@@ -28,6 +31,7 @@ public:
     void setpos(int x, int y);
 
 private:
+
     Sprite sprite;
     Texture texture;
     int x;

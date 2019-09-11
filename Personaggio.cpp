@@ -40,10 +40,10 @@ Personaggio::Personaggio() {
     int xi;
     int yi;
     do {
-        xi = static_cast<int>(random() % Mappa::crea().getColumns());
+        xi = static_cast<int>(random() %  Mappa::crea().getColumns());
         yi = static_cast<int>(random() % Mappa::crea().getRows());
     }while (Mappa::crea().getTiles(xi,yi) >= 9);
-    cout << Mappa::crea().getTiles(xi,yi) << endl;
+   // cout << Mappa::crea().getTiles(xi,yi) << endl;
     this->x=xi;
     this->y=yi;
 
@@ -66,4 +66,20 @@ const vector<Vector2f> &Personaggio::getCoordinate() const {
 
 void Personaggio::setCoordinate(int x, int y) {
     Personaggio::coordinate.push_back(Vector2f(y,x));
+}
+
+int Personaggio::getIndex() const {
+    return index;
+}
+
+Personaggio::Personaggio(int x, int y) {
+    this->x=x;
+    this->y=y;
+    index=0;
+
+}
+
+Personaggio &Personaggio::crea(int x, int y) {
+    static Personaggio personaggio(x,y);
+    return personaggio;
 }

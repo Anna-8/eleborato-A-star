@@ -22,16 +22,23 @@ private:
     VertexArray m_vertices;
     sf::RenderStates states;
     enum Mappe : char{mappa1 = 'a',mappa2 = 'b' ,mappa3 = 'c'};
-    int rows;
-    int columns;
+    int rows=0;
+    int columns=0;
     vector<vector<int>>tiles;
     Mappa(int dim);
+    Mappa(char x);
+    int* lvlmap;
+    vector<int>type;
+
+
 
 public:
-    static Mappa& crea(int dim =rand()%3 );
+    static Mappa&crea(int dim =rand()%3 );
+    static Mappa&crea(char x);
 
-    int getColumns() const;
-    int getRows() const;
+
+    int getColumns() ;
+    int getRows() ;
     int GetMap(int x, int y);
     void findDimension();
     bool load();

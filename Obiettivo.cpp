@@ -50,3 +50,13 @@ void Obiettivo::drawPersonaggio(RenderWindow &window) {
     window.draw(sprite);
 
 }
+
+Obiettivo::Obiettivo(int x, int y) {
+    this->x=x;
+    this->y= y;
+    texture.loadFromFile("nido.png");
+    sprite.setTexture(texture);
+    sprite.scale(0.15,0.15);
+    sprite.setPosition(y*TILE,x*TILE);
+
+}

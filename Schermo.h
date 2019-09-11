@@ -13,7 +13,7 @@ using namespace sf;
 
 class Schermo {
 public:
-    Schermo(Obiettivo obiettivo);
+    Schermo();
     ~Schermo();
     void generaSchermo(Obiettivo obiettivo);
     void Astar( Obiettivo obiettivo);

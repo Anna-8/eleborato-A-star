@@ -23,7 +23,6 @@ Mappa::Mappa(int dim) {
     fstream mapTextFile;
     mapTextFile.open(s+".txt");
 
-
     int i=0;
     string line;
     vector <int> lineTiles;
@@ -41,7 +40,8 @@ Mappa::Mappa(int dim) {
 
     findDimension();
 
-    for (int i = 0; i < rows; i++) {
+
+    /*for (int i = 0; i < rows; i++) {
 
         for (int j = 0; j < columns; j++) {
 
@@ -49,7 +49,7 @@ Mappa::Mappa(int dim) {
             std::cout << tiles[i][j] << " ";
         }
         std::cout << std::endl;
-    }
+    }*/
 }
 
 void Mappa::findDimension() {
@@ -58,11 +58,11 @@ void Mappa::findDimension() {
     columns=tiles[0].size();
 }
 
-int Mappa::getRows() const {
+int Mappa::getRows()  {
     return rows;
 }
 
-int Mappa::getColumns() const {
+int Mappa::getColumns()  {
     return columns;
 }
 
@@ -76,7 +76,10 @@ int Mappa::GetMap( int x, int y ) {
 
 
 
+
+
 Mappa &Mappa::crea(int dim) {
+
     static Mappa mappa(dim);
     return mappa;
 }
@@ -155,3 +158,55 @@ void Mappa::DisegnaMappa(RenderWindow &window) {
 
 }
 
+Mappa::Mappa(char x) {
+/*    string s;
+    stringstream ss;
+    ss << x;
+    ss >> s;
+
+    fstream mapTextFile;
+    mapTextFile.open(s+".txt");
+
+    int i=0;
+    string line;
+    vector <int> lineTiles;
+
+    while(getline(mapTextFile,line)) {
+        istringstream iss(line);
+        while(iss>>i) {
+            lineTiles.push_back(i);
+        }
+
+        tiles.push_back(lineTiles);//vettore di vettori
+        lineTiles.clear();
+    }
+    mapTextFile.close();
+    findDimension();*/
+    int n =4;
+    int size;
+    int array[n];
+
+    if(x == 'a') {
+        size = 28;
+         array [n]= 0, 0, 2, 282;
+    }
+    else {
+        size = 16;
+        array[n]=0,0,2,260;
+    }
+    lvlmap = new int[size * size];
+
+
+    for(int i=0;i<size;i++) {
+        for (int j = 0; j < size; j++) {
+            Mappa::lvlmap[i * size + j] = array[rand() % 4];
+        }
+    }
+    rows= size;
+    columns= size;
+}
+
+Mappa &Mappa::crea(char x) {
+    static Mappa mappa(x);
+    return mappa;
+}

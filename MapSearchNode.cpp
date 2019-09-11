@@ -21,18 +21,6 @@ bool MapSearchNode::IsSameState( MapSearchNode &rhs ){
 
 void MapSearchNode::PrintNodeInfo(){
     Personaggio::crea().setCoordinate(x*TILE,y*TILE);
-    cout << Mappa::crea().getTiles(x,y) << endl;
-
-    for (int i = 0; i < Mappa::crea().getRows(); i++) {
-
-        for (int j = 0; j < Mappa::crea().getColumns(); j++) {
-
-
-            std::cout << Mappa::crea().getTiles(i,j) << " ";
-        }
-        std::cout << std::endl;
-    }
-
     char str[100];
     sprintf( str, "Node position : (%d,%d)\n", x,y );
     cout << str;

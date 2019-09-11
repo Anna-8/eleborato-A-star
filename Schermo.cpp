@@ -6,7 +6,6 @@
 #include "Mappa.h"
 #include "Personaggio.h"
 #include "Obiettivo.h"
-
 #include "stlastar.h"
 #include "MapSearchNode.h"
 
@@ -17,7 +16,7 @@
 Schermo::~Schermo() = default;
 
 
-Schermo::Schermo( Obiettivo obiettivo) {
+Schermo::Schermo() {
     Mappa::crea().load();
     view.setSize(Mappa::crea().getRows()*TILE, Mappa::crea().getColumns()*TILE);
     view.setCenter(Mappa::crea().getRows()*TILE/2, Mappa::crea().getColumns()*TILE/2);
@@ -25,9 +24,6 @@ Schermo::Schermo( Obiettivo obiettivo) {
     window.setFramerateLimit(60); //Limit the framerate to a maximum fixed frequenc,Parameters: Framerate limit, in frames per seconds
     sf::WindowHandle handle = window.getSystemHandle(); //Get the OS-specific handle of the window
     sf::Window window(handle);
-
-
-
 }
 
 void Schermo::generaSchermo(Obiettivo obiettivo) {

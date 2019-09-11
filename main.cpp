@@ -9,14 +9,10 @@
 
 
 int main() {
-
     srand((unsigned int)time(NULL));
     Personaggio p=Personaggio::crea();
     Obiettivo o;
-    Schermo schermo( o);
-    schermo.generaSchermo( o);
-
+    Schermo schermo;
+    schermo.generaSchermo(o);
     return 0;
-
-
 }
