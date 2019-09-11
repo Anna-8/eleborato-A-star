@@ -159,7 +159,7 @@ void Mappa::DisegnaMappa(RenderWindow &window) {
 }
 
 Mappa::Mappa(char x) {
-/*    string s;
+    string s;
     stringstream ss;
     ss << x;
     ss >> s;
@@ -181,8 +181,8 @@ Mappa::Mappa(char x) {
         lineTiles.clear();
     }
     mapTextFile.close();
-    findDimension();*/
-    int n =4;
+    findDimension();
+    /*int n =4;
     int size;
     int array[n];
 
@@ -203,7 +203,7 @@ Mappa::Mappa(char x) {
         }
     }
     rows= size;
-    columns= size;
+    columns= size;*/
 }
 
 Mappa &Mappa::crea(char x) {

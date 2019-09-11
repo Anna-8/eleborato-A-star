@@ -16,13 +16,13 @@ TEST(DimensioneMappa,Mappatest0 ) {
 
 
 TEST(DimensioneMappa, Mappatest1){
-    Mappa map1 = Mappa::crea();
+    Mappa map1 = Mappa::crea('b');
     ASSERT_EQ(map1.getRows(),16) << "Mappa piccola reading problem: height not calculated correctly.";
     ASSERT_EQ(map1.getColumns(),16) << "Mappa piccola reading problem: width not calculated correctly.";
 }
 
 TEST(DimensioneMappa, Mappatest2) {
-    Mappa map2 = Mappa::crea(2);
+    Mappa map2 = Mappa::crea('c');
     ASSERT_EQ(map2.getRows(),16) << "Mappa piccola reading problem: height not calculated correctly.";
     ASSERT_EQ(map2.getColumns(),16) << "Mappa piccola reading problem: width not calculated correctly.";
 }
@@ -38,8 +38,8 @@ TEST(PosizionePersonaggio,check) {
     ASSERT_EQ(vec[0].y,15);
     ASSERT_EQ(vec[1].x,1);
     ASSERT_EQ(vec[1].y,15);
-    ASSERT_EQ(vec[1].x,2);
-    ASSERT_EQ(vec[1].y,15);
+    ASSERT_EQ(vec[2].x,2);
+    ASSERT_EQ(vec[2].y,15);
 }
 
 
