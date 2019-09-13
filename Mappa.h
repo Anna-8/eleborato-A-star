@@ -37,8 +37,8 @@ public:
     static Mappa&crea(char x);
 
 
-    int getColumns() ;
-    int getRows() ;
+    int getColumns() const;
+    int getRows() const ;
     int GetMap(int x, int y);
     void findDimension();
     bool load();

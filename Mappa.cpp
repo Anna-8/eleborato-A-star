@@ -58,11 +58,11 @@ void Mappa::findDimension() {
     columns=tiles[0].size();
 }
 
-int Mappa::getRows()  {
+int Mappa::getRows() const {
     return rows;
 }
 
-int Mappa::getColumns()  {
+int Mappa::getColumns() const  {
     return columns;
 }
 
@@ -85,41 +85,21 @@ Mappa &Mappa::crea(int dim) {
 }
 
 bool Mappa::load() {
-
-    // load the map tileset texture
-
-    if (!tex.loadFromFile("tileset.png"))
+    if (!tex.loadFromFile("tileset.png"))// load the map tileset texture
         return false;
-
-    // resize the vertex array to fit the tile size
-
-    m_vertices.setPrimitiveType(sf::Quads);
-
-    m_vertices.resize(rows * columns * 4);
-
-    // populate the vertex array, with one quad per tile
-
+    m_vertices.setPrimitiveType(sf::Quads); // resize the vertex array to fit the tile size
+    m_vertices.resize(rows * columns * 4);// populate the vertex array, with one quad per tile
     for (unsigned int i = 0; i < rows; i++) {
 
         for (unsigned int j = 0; j < columns; j++) {
 
-            // get the current tile number
-
-            int tileNumber = tiles[i][j];
-
-
-            // find its position in the tileset texture
+            int tileNumber = tiles[i][j];// get the current tile number
 
             int tu = tileNumber % (tex.getSize().x / TILE); // getSize() return the size (in Pixels) of the texture.
 
-            int tv = tileNumber / (tex.getSize().x / TILE);
+            int tv = tileNumber / (tex.getSize().x / TILE);// find its position in the tileset texture
 
-
-            // get a pointer to the current tile's quad
-
-            sf::Vertex *quad = &m_vertices[(j + i * columns) * 4];
-
-            // define its 4 cornvoid findDimension();ers
+            sf::Vertex *quad = &m_vertices[(j + i * columns) * 4];// get a pointer to the current tile's quad
 
             quad[0].position = sf::Vector2f(j * TILE, i * TILE);
 
@@ -129,9 +109,7 @@ bool Mappa::load() {
 
             quad[3].position = sf::Vector2f(j * TILE, (i + 1) * TILE);
 
-            // define its 4 texture coordinates
-
-            quad[0].texCoords = sf::Vector2f(tu * TILE, tv * TILE);
+            quad[0].texCoords = sf::Vector2f(tu * TILE, tv * TILE);// define its 4 texture coordinates
 
             quad[1].texCoords = sf::Vector2f((tu + 1) * TILE, tv * TILE);
 
