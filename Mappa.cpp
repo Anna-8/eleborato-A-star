@@ -40,16 +40,6 @@ Mappa::Mappa(int dim) {
 
     findDimension();
 
-
-    /*for (int i = 0; i < rows; i++) {
-
-        for (int j = 0; j < columns; j++) {
-
-
-            std::cout << tiles[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }*/
 }
 
 void Mappa::findDimension() {
@@ -73,10 +63,6 @@ int Mappa::GetMap( int x, int y ) {
     }
     return tiles[x][y];
 }
-
-
-
-
 
 Mappa &Mappa::crea(int dim) {
 
@@ -160,28 +146,6 @@ Mappa::Mappa(char x) {
     }
     mapTextFile.close();
     findDimension();
-    /*int n =4;
-    int size;
-    int array[n];
-
-    if(x == 'a') {
-        size = 28;
-         array [n]= 0, 0, 2, 282;
-    }
-    else {
-        size = 16;
-        array[n]=0,0,2,260;
-    }
-    lvlmap = new int[size * size];
-
-
-    for(int i=0;i<size;i++) {
-        for (int j = 0; j < size; j++) {
-            Mappa::lvlmap[i * size + j] = array[rand() % 4];
-        }
-    }
-    rows= size;
-    columns= size;*/
 }
 
 Mappa &Mappa::crea(char x) {

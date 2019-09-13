@@ -27,23 +27,16 @@ private:
     vector<vector<int>>tiles;
     Mappa(int dim);
     Mappa(char x);
-    int* lvlmap;
     vector<int>type;
-
-
-
 public:
     static Mappa&crea(int dim =rand()%3 );
     static Mappa&crea(char x);
-
-
     int getColumns() const;
     int getRows() const ;
     int GetMap(int x, int y);
     void findDimension();
     bool load();
     void DisegnaMappa(RenderWindow &window);
-
     int getTiles(int x, int y) const;
 
 

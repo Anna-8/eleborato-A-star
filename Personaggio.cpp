@@ -43,7 +43,6 @@ Personaggio::Personaggio() {
         xi = static_cast<int>(random() %  Mappa::crea().getColumns());
         yi = static_cast<int>(random() % Mappa::crea().getRows());
     }while (Mappa::crea().getTiles(xi,yi) >= 9);
-   // cout << Mappa::crea().getTiles(xi,yi) << endl;
     this->x=xi;
     this->y=yi;
 
